@@ -12,6 +12,10 @@
 presentation.md  →  slide2video  →  output.mp4 + output.srt
 ```
 
+[▶ 点击查看完整示例视频](example/demo_preview.mp4)
+
+![demo](example/demo_preview.gif)
+
 ## 功能特性
 
 - 🗣️ **语音旁白** — 基于 edge-tts（微软免费 TTS），支持中英文多种语音
