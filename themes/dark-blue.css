@@ -1,0 +1,125 @@
+/* @theme dark-blue */
+/* 深蓝商务 — 沉稳专业，汇报演讲首选 */
+/* 设计原则：冷蓝背景 + 暖金/亮白强调 */
+
+@import 'default';
+
+section {
+  background: linear-gradient(135deg, #0a1628 0%, #1a3a5c 100%);
+  color: #e8edf3;
+}
+
+section h1, section h2, section h3 {
+  color: #ffffff;
+}
+
+section strong {
+  color: #ffd54f;
+}
+
+section em {
+  color: #90caf9;
+}
+
+section a {
+  color: #64b5f6;
+}
+
+/* 行内代码 */
+section code {
+  background: rgba(0, 0, 0, 0.35);
+  color: #80cbc4;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 代码块 */
+section pre {
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(100, 181, 246, 0.25);
+  border-left: 4px solid #42a5f5;
+  border-radius: 6px;
+}
+
+section pre code {
+  background: transparent;
+  color: #e0e0e0;
+}
+
+/* 表格 */
+section table {
+  background: transparent;
+  color: #e8edf3;
+}
+
+section table th {
+  background: rgba(66, 165, 245, 0.25);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+section table tr:nth-child(even) {
+  background: transparent;
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+/* 引用块 */
+section blockquote {
+  border-left: 4px solid #42a5f5;
+  color: #90caf9;
+  background: rgba(0, 0, 0, 0.15);
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #ffd54f;
+}
+
+section del {
+  color: rgba(232, 237, 243, 0.45);
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid rgba(66, 165, 245, 0.3);
+}
+
+section mark {
+  background: rgba(255, 213, 79, 0.2);
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #e8edf3;
+}
+
+section img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Code syntax highlighting for dark background */
+section {
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+}

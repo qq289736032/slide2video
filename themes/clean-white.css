@@ -1,0 +1,104 @@
+/* @theme clean-white */
+/* 清爽白蓝 — 教育培训，日常使用 */
+/* 设计原则：白底 + 蓝色主色 + 紫色代码 */
+
+@import 'default';
+
+section {
+  background: linear-gradient(180deg, #ffffff 0%, #f0f4f8 100%);
+  color: #2d3748;
+}
+
+section h1 {
+  color: #1a56db;
+  font-weight: 700;
+}
+
+section h2, section h3 {
+  color: #1e40af;
+}
+
+section strong {
+  color: #1e40af;
+}
+
+section em {
+  color: #4338ca;
+}
+
+section a {
+  color: #2563eb;
+}
+
+section code {
+  background: #eef2ff;
+  color: #4338ca;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+section pre {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-left: 4px solid #3b82f6;
+}
+
+section pre code {
+  background: transparent;
+  color: #334155;
+}
+
+section table {
+  background: transparent;
+  color: #2d3748;
+}
+
+section table th {
+  background: #eff6ff;
+  color: #1e40af;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: #e2e8f0;
+}
+
+section table tr:nth-child(even) {
+  background: rgba(239, 246, 255, 0.5);
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+section blockquote {
+  border-left: 4px solid #3b82f6;
+  color: #475569;
+  background: #f8fafc;
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #3b82f6;
+}
+
+section del {
+  color: #94a3b8;
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+section mark {
+  background: rgba(59, 130, 246, 0.12);
+  color: #1e40af;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #475569;
+}

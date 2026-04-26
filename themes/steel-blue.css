@@ -1,0 +1,123 @@
+/* @theme steel-blue */
+/* 钢蓝商务 — 冷静理性，数据报告风格 */
+/* 设计原则：冷灰蓝背景 + 暖橙/亮白强调 */
+
+@import 'default';
+
+section {
+  background: linear-gradient(180deg, #1c2938 0%, #2c3e50 60%, #34495e 100%);
+  color: #dce6f0;
+}
+
+section h1, section h2, section h3 {
+  color: #ecf0f1;
+  border-bottom: 2px solid rgba(52, 152, 219, 0.4);
+  padding-bottom: 8px;
+}
+
+section strong {
+  color: #f0c040;
+}
+
+section em {
+  color: #85c1e9;
+}
+
+section a {
+  color: #5dade2;
+}
+
+section code {
+  background: rgba(0, 0, 0, 0.3);
+  color: #80cbc4;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+section pre {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(93, 173, 226, 0.25);
+  border-left: 4px solid #2980b9;
+  border-radius: 6px;
+}
+
+section pre code {
+  background: transparent;
+  color: #dce6f0;
+}
+
+section table {
+  background: transparent;
+  color: #dce6f0;
+}
+
+section table th {
+  background: rgba(41, 128, 185, 0.3);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+section table tr:nth-child(even) {
+  background: transparent;
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+section blockquote {
+  border-left: 4px solid #2980b9;
+  color: #85c1e9;
+  background: rgba(0, 0, 0, 0.12);
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #f0c040;
+}
+
+section del {
+  color: rgba(220, 230, 240, 0.45);
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid rgba(41, 128, 185, 0.3);
+}
+
+section mark {
+  background: rgba(240, 192, 64, 0.2);
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #dce6f0;
+}
+
+section img {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Code syntax highlighting for dark background */
+section {
+  --color-prettylights-syntax-comment: #8b949e;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+}

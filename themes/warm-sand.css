@@ -1,0 +1,104 @@
+/* @theme warm-sand */
+/* 暖沙教育 — 温暖柔和，长时间阅读不疲劳 */
+/* 设计原则：暖米底 + 红棕主色 + 橙色点缀 */
+
+@import 'default';
+
+section {
+  background: linear-gradient(180deg, #fefcf3 0%, #f5f0e1 100%);
+  color: #3e3232;
+}
+
+section h1 {
+  color: #c0392b;
+  font-weight: 700;
+}
+
+section h2, section h3 {
+  color: #a93226;
+}
+
+section strong {
+  color: #c0392b;
+}
+
+section em {
+  color: #a04000;
+}
+
+section a {
+  color: #d35400;
+}
+
+section code {
+  background: #f5ebe0;
+  color: #a04000;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+section pre {
+  background: #fdf6e3;
+  border: 1px solid #e8dcc8;
+  border-left: 4px solid #e67e22;
+}
+
+section pre code {
+  background: transparent;
+  color: #3e3232;
+}
+
+section table {
+  background: transparent;
+  color: #3e3232;
+}
+
+section table th {
+  background: rgba(230, 126, 34, 0.1);
+  color: #a04000;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: #e8dcc8;
+}
+
+section table tr:nth-child(even) {
+  background: rgba(245, 240, 225, 0.5);
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+section blockquote {
+  border-left: 4px solid #e67e22;
+  color: #7f6c5b;
+  background: #fdf6e3;
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #e67e22;
+}
+
+section del {
+  color: #b0a090;
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid rgba(230, 126, 34, 0.3);
+}
+
+section mark {
+  background: rgba(230, 126, 34, 0.12);
+  color: #3e3232;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #7f6c5b;
+}

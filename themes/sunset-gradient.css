@@ -1,0 +1,140 @@
+/* @theme sunset-gradient */
+/* 日落渐变 — 暖色创意，自媒体/Vlog 风格 */
+/* 设计原则：暖色背景 + 冷色/亮白强调，代码块用深底拉开层次 */
+
+@import 'default';
+
+section {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 50%, #ff9a44 100%);
+  color: #ffffff;
+}
+
+section h1 {
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+section h2, section h3 {
+  color: #ffffff;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* 强调用亮青色，跟暖色背景形成冷暖对比 */
+section strong {
+  color: #b2fff9;
+}
+
+section em {
+  color: #ffe0b2;
+}
+
+section a {
+  color: #b2fff9;
+  text-decoration: underline;
+}
+
+/* 行内代码：深底 + 亮字，不用白色半透明底 */
+section code {
+  background: rgba(20, 10, 15, 0.45);
+  color: #ffd54f;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+/* 代码块：深色实底，跟渐变背景强烈区分 */
+section pre {
+  background: rgba(25, 12, 18, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-left: 4px solid #ffd54f;
+  border-radius: 8px;
+}
+
+section pre code {
+  background: transparent;
+  color: #f5f5f5;
+}
+
+/* 表格 */
+section table {
+  background: transparent;
+  color: #ffffff;
+}
+
+section table th {
+  background: rgba(20, 10, 15, 0.35);
+  color: #ffffff;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+section table tr:nth-child(even) {
+  background: transparent;
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+/* 引用块 */
+section blockquote {
+  border-left: 4px solid #b2fff9;
+  color: #ffffff;
+  background: rgba(20, 10, 15, 0.2);
+  padding: 8px 16px;
+}
+
+/* 列表符号用冷色 */
+section li::marker {
+  color: #b2fff9;
+}
+
+/* 删除线 */
+section del {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* 水平线 */
+section hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 高亮标记：深底亮字，不用默认黄底 */
+section mark {
+  background: rgba(178, 255, 249, 0.25);
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* 上下标 */
+section sup, section sub {
+  color: #ffffff;
+}
+
+/* 图片边框 */
+section img {
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+}
+
+/* Code syntax highlighting for dark background */
+section {
+  --color-prettylights-syntax-comment: #b0a8c0;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+}

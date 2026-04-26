@@ -1,0 +1,121 @@
+/* @theme cyber-dark */
+/* 赛博暗夜 — 科技感，开发者/技术分享 */
+/* 设计原则：黑底 + 青色主色 + 绿色辅助 */
+
+@import 'default';
+
+section {
+  background: radial-gradient(ellipse at 20% 80%, #0d2137 0%, #0a0a0a 70%);
+  color: #c8d6e5;
+}
+
+section h1, section h2, section h3 {
+  color: #00e5ff;
+}
+
+section strong {
+  color: #00e5ff;
+}
+
+section em {
+  color: #00e676;
+}
+
+section a {
+  color: #00e676;
+}
+
+section code {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e676;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+section pre {
+  background: rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(0, 229, 255, 0.25);
+  border-left: 4px solid #00e5ff;
+  border-radius: 6px;
+}
+
+section pre code {
+  background: transparent;
+  color: #c8d6e5;
+}
+
+section table {
+  background: transparent;
+  color: #c8d6e5;
+}
+
+section table th {
+  background: rgba(0, 229, 255, 0.12);
+  color: #00e5ff;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: rgba(0, 229, 255, 0.1);
+}
+
+section table tr:nth-child(even) {
+  background: transparent;
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+section blockquote {
+  border-left: 4px solid #00e5ff;
+  color: #00e676;
+  background: rgba(0, 229, 255, 0.04);
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #00e5ff;
+}
+
+section del {
+  color: rgba(200, 214, 229, 0.4);
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+section mark {
+  background: rgba(0, 229, 255, 0.15);
+  color: #ffffff;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #c8d6e5;
+}
+
+section img {
+  border: 1px solid rgba(0, 229, 255, 0.1);
+  border-radius: 4px;
+}
+
+/* Code syntax highlighting for dark background */
+section {
+  --color-prettylights-syntax-comment: #7ec8d6;
+  --color-prettylights-syntax-constant: #79c0ff;
+  --color-prettylights-syntax-entity: #d2a8ff;
+  --color-prettylights-syntax-entity-tag: #7ee787;
+  --color-prettylights-syntax-keyword: #ff7b72;
+  --color-prettylights-syntax-string: #a5d6ff;
+  --color-prettylights-syntax-variable: #ffa657;
+  --color-prettylights-syntax-storage-modifier-import: #c9d1d9;
+  --color-prettylights-syntax-markup-heading: #1f6feb;
+  --color-prettylights-syntax-markup-bold: #c9d1d9;
+  --color-prettylights-syntax-markup-italic: #c9d1d9;
+  --color-prettylights-syntax-markup-list: #f2cc60;
+}

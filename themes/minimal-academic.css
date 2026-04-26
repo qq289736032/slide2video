@@ -1,0 +1,110 @@
+/* @theme minimal-academic */
+/* 学术极简 — 零干扰，论文答辩/技术文档 */
+/* 设计原则：纯白底 + 黑字 + 红色代码 + 灰色辅助 */
+
+@import 'default';
+
+section {
+  background: #ffffff;
+  color: #1a1a1a;
+  font-family: 'Georgia', 'Songti SC', serif;
+}
+
+section h1 {
+  color: #000000;
+  font-weight: 700;
+  border-bottom: 3px solid #1a1a1a;
+  padding-bottom: 10px;
+}
+
+section h2, section h3 {
+  color: #333333;
+  font-weight: 600;
+}
+
+section strong {
+  color: #1565c0;
+}
+
+section em {
+  color: #555555;
+}
+
+section a {
+  color: #1565c0;
+}
+
+section code {
+  background: #f5f5f5;
+  color: #c62828;
+  font-family: 'Menlo', 'Courier New', monospace;
+  padding: 2px 6px;
+  border-radius: 3px;
+}
+
+section pre {
+  background: #fafafa;
+  border: 1px solid #e0e0e0;
+  border-left: 4px solid #9e9e9e;
+  border-radius: 0;
+}
+
+section pre code {
+  background: transparent;
+  color: #1a1a1a;
+}
+
+section table {
+  background: transparent;
+  color: #1a1a1a;
+}
+
+section table th {
+  background: #f5f5f5;
+  color: #1a1a1a;
+  font-weight: 700;
+}
+
+section table td {
+  background: transparent;
+  border-color: #e0e0e0;
+}
+
+section table tr:nth-child(even) {
+  background: #fafafa;
+}
+
+section table tr:nth-child(odd) {
+  background: transparent;
+}
+
+section blockquote {
+  border-left: 4px solid #9e9e9e;
+  color: #616161;
+  background: #fafafa;
+  padding: 8px 16px;
+}
+
+section li::marker {
+  color: #555555;
+}
+
+section del {
+  color: #9e9e9e;
+}
+
+section hr {
+  border: none;
+  border-top: 1px solid #e0e0e0;
+}
+
+section mark {
+  background: #fff9c4;
+  color: #1a1a1a;
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+section sup, section sub {
+  color: #616161;
+}
