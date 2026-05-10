@@ -47,6 +47,19 @@ def get_sorted_files(directory: str, extensions: "list[str]") -> "list[str]":
     return unique
 
 
+def escape_drawtext(text: str) -> str:
+    """Escape special characters for ffmpeg drawtext filter.
+
+    Order matters: backslash must be escaped first to avoid double-escaping.
+    """
+    text = text.replace("\\", "\\\\")   # \ → \\  (must be first)
+    text = text.replace(";", "\\;")     # ; → \;  (filter chain separator)
+    text = text.replace("%", "%%")      # % → %%  (timecode format prefix)
+    text = text.replace("'", "\u2019")  # ' → '   (replace with curly quote to avoid shell issues)
+    text = text.replace(":", "\\:")     # : → \:  (filter param separator)
+    return text
+
+
 def build_watermark_filter(watermark: dict) -> str:
     """Build ffmpeg drawtext filter string for watermark."""
     wm = dict(DEFAULT_WATERMARK)
@@ -58,8 +71,8 @@ def build_watermark_filter(watermark: dict) -> str:
     pos = WATERMARK_POSITIONS.get(wm["position"], WATERMARK_POSITIONS["top_right"])
     x_expr = pos[0].format(m=wm["margin"])
     y_expr = pos[1].format(m=wm["margin"])
-    escaped_text = wm["text"].replace("'", "\\'").replace(":", "\\:")
-    escaped_font = wm["font"].replace("'", "\\'")
+    escaped_text = escape_drawtext(wm["text"])
+    escaped_font = wm["font"].replace("'", "\u2019")
 
     return (
         f"drawtext=text='{escaped_text}'"

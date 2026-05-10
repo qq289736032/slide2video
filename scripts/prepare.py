@@ -81,16 +81,31 @@ def split_slides(body: str) -> "list[str]":
     return slides
 
 
-def extract_notes(slide_content: str) -> str:
+def has_notes_opener(slide_content: str) -> bool:
+    """Check if a slide contains a ::: notes opening tag."""
+    return bool(re.search(r":::\s*notes", slide_content))
+
+
+def extract_notes(slide_content: str, slide_num: int = 0) -> str:
     """Extract ::: notes ... ::: block from a slide.
 
     Returns the notes text, or empty string if no notes block found.
+    Prints a warning if ::: notes is opened but never closed.
     """
     match = re.search(
         r":::\s*notes\s*\n(.*?)\n\s*:::", slide_content, re.DOTALL
     )
     if match:
         return match.group(1).strip()
+
+    # Warn if ::: notes opener exists but regex didn't match (unclosed block)
+    if has_notes_opener(slide_content):
+        print(
+            f"Warning: Slide {slide_num}: '::: notes' block is not closed. "
+            f"This slide will have no narration.",
+            file=sys.stderr,
+        )
+
     return ""
 
 
@@ -145,7 +160,7 @@ def parse_markdown(filepath: str) -> "tuple[dict, str]":
 
     notes_list = []
     for i, slide in enumerate(slides, start=1):
-        notes_text = extract_notes(slide)
+        notes_text = extract_notes(slide, slide_num=i)
         notes_list.append({"slide": i, "notes": notes_text})
 
     # Generate clean markdown (no notes blocks)

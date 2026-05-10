@@ -44,6 +44,80 @@ def split_sentences(text: str) -> "list[str]":
     return sentences
 
 
+def map_boundaries_to_sentences(
+    sentences: "list[str]", word_boundaries: "list[dict]"
+) -> "list[dict]":
+    """Map word boundaries to sentences by text position matching.
+
+    Assigns each word boundary to the sentence that contains it,
+    then computes precise start/end times for each sentence.
+
+    Args:
+        sentences: List of sentence strings.
+        word_boundaries: List of dicts with offset_ms, duration_ms, text.
+
+    Returns:
+        List of dicts with 'start_ms' and 'end_ms' for each sentence.
+        Returns empty list if mapping fails.
+    """
+    if not sentences or not word_boundaries:
+        return []
+
+    # Build a flat text from sentences to find character positions
+    # We need to map each boundary's text to a sentence
+    sentence_boundaries = []  # [(start_char_pos, end_char_pos)] for each sentence
+
+    # Reconstruct the full text from sentences and find where each sentence starts
+    # Strategy: walk through word_boundaries sequentially, assign to sentences
+    # by consuming characters from each sentence
+    result = []
+    boundary_idx = 0
+
+    for sent in sentences:
+        sent_start_ms = None
+        sent_end_ms = None
+
+        # Try to find boundaries that belong to this sentence
+        # by matching boundary text against remaining sentence content
+        remaining = sent
+        while boundary_idx < len(word_boundaries) and remaining:
+            b = word_boundaries[boundary_idx]
+            b_text = b["text"]
+
+            # Check if this boundary's text appears in the remaining sentence
+            pos = remaining.find(b_text)
+            if pos != -1:
+                # This boundary belongs to this sentence
+                if sent_start_ms is None:
+                    sent_start_ms = b["offset_ms"]
+                sent_end_ms = b["offset_ms"] + b["duration_ms"]
+                # Consume the matched portion
+                remaining = remaining[pos + len(b_text):]
+                boundary_idx += 1
+            elif pos == -1 and not remaining.strip():
+                # Remaining is only whitespace/punctuation, move on
+                break
+            else:
+                # Boundary text not found in remaining sentence
+                # Could be punctuation was consumed or mismatch
+                # Try skipping punctuation/whitespace in remaining
+                stripped = remaining.lstrip("，。！？、；：""''（）【】《》…—·,.:;!? \t")
+                if stripped != remaining:
+                    remaining = stripped
+                    continue
+                # Still no match - this boundary might belong to next sentence
+                break
+
+        # If we found at least one boundary for this sentence
+        if sent_start_ms is not None:
+            result.append({"start_ms": sent_start_ms, "end_ms": sent_end_ms})
+        else:
+            # No boundary matched - will need fallback
+            return []
+
+    return result
+
+
 def format_srt_time(seconds: float) -> str:
     """Format seconds to SRT timestamp: HH:MM:SS,mmm"""
     h = int(seconds // 3600)
@@ -65,6 +139,9 @@ def format_ass_time(seconds: float) -> str:
 def generate_srt(notes_data: dict, audio_files: "list[str]", output_path: str) -> "list[dict]":
     """Generate SRT subtitle file with per-sentence timing.
 
+    Uses WordBoundary data for precise timing when available,
+    falls back to character-ratio estimation otherwise.
+
     Returns list of per-slide entries with sentence timing for ASS generation.
     """
     slides = notes_data.get("slides", [])
@@ -77,6 +154,7 @@ def generate_srt(notes_data: dict, audio_files: "list[str]", output_path: str) -
         duration = get_audio_duration(audio_path)
         notes = slide_info.get("notes", "").strip()
         sentences = split_sentences(notes)
+        word_boundaries = slide_info.get("word_boundaries", [])
 
         slide_entry = {
             "duration": duration,
@@ -85,24 +163,47 @@ def generate_srt(notes_data: dict, audio_files: "list[str]", output_path: str) -
         }
 
         if sentences:
-            total_chars = sum(len(s) for s in sentences)
-            sent_time = current_time
-            for sent in sentences:
-                ratio = len(sent) / total_chars if total_chars > 0 else 1.0 / len(sentences)
-                sent_dur = duration * ratio
-                sent_end = sent_time + sent_dur
+            # Try precise timing via WordBoundary data
+            precise_timing = None
+            if word_boundaries:
+                precise_timing = map_boundaries_to_sentences(sentences, word_boundaries)
 
-                slide_entry["sentences"].append({
-                    "start": sent_time - current_time,
-                    "end": sent_end - current_time,
-                    "text": sent,
-                })
+            if precise_timing:
+                # Use precise WordBoundary timing
+                for sent, timing in zip(sentences, precise_timing):
+                    sent_start = timing["start_ms"] / 1000.0  # ms → seconds (relative to slide)
+                    sent_end = timing["end_ms"] / 1000.0
 
-                srt_lines.append(f"{srt_index}\n")
-                srt_lines.append(f"{format_srt_time(sent_time)} --> {format_srt_time(sent_end)}\n")
-                srt_lines.append(f"{sent}\n\n")
-                srt_index += 1
-                sent_time = sent_end
+                    slide_entry["sentences"].append({
+                        "start": sent_start,
+                        "end": sent_end,
+                        "text": sent,
+                    })
+
+                    srt_lines.append(f"{srt_index}\n")
+                    srt_lines.append(f"{format_srt_time(current_time + sent_start)} --> {format_srt_time(current_time + sent_end)}\n")
+                    srt_lines.append(f"{sent}\n\n")
+                    srt_index += 1
+            else:
+                # Fallback: character-ratio estimation
+                total_chars = sum(len(s) for s in sentences)
+                sent_time = current_time
+                for sent in sentences:
+                    ratio = len(sent) / total_chars if total_chars > 0 else 1.0 / len(sentences)
+                    sent_dur = duration * ratio
+                    sent_end = sent_time + sent_dur
+
+                    slide_entry["sentences"].append({
+                        "start": sent_time - current_time,
+                        "end": sent_end - current_time,
+                        "text": sent,
+                    })
+
+                    srt_lines.append(f"{srt_index}\n")
+                    srt_lines.append(f"{format_srt_time(sent_time)} --> {format_srt_time(sent_end)}\n")
+                    srt_lines.append(f"{sent}\n\n")
+                    srt_index += 1
+                    sent_time = sent_end
 
         entries.append(slide_entry)
         current_time += duration
